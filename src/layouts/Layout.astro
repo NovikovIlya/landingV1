@@ -1,0 +1,116 @@
+---
+export interface Props {
+  seoData: {
+    title: string;
+    description: string;
+    keywords: string;
+    ogImage: string;
+  };
+}
+
+const { seoData } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={seoData.description} />
+    <meta name="keywords" content={seoData.keywords} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Департамент информатизации и связи КФУ" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={seoData.title} />
+    <meta property="og:description" content={seoData.description} />
+    <meta property="og:image" content={new URL(seoData.ogImage, Astro.url)} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="КФУ - Единый личный кабинет" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={seoData.title} />
+    <meta property="twitter:description" content={seoData.description} />
+    <meta property="twitter:image" content={new URL(seoData.ogImage, Astro.url)} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/VectorFNNN.svg" />
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Sans+Caption:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Казанский федеральный университет",
+        "alternateName": "КФУ",
+        "url": "https://kpfu.ru",
+        "logo": "https://kpfu.ru/logo.png",
+        "description": "Казанский федеральный университет - один из ведущих университетов России",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "ул. Кремлевская, 18",
+          "addressLocality": "Казань",
+          "postalCode": "420008",
+          "addressCountry": "RU"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+7-843-206-50-84",
+          "contactType": "customer service",
+          "email": "dis@kpfu.ru"
+        }
+      }
+    </script>
+    
+    <title>{seoData.title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bluebright: rgba(48, 115, 215, 1);
+    --bluedark: rgba(31, 92, 184, 1);
+    --bluelight: rgba(101, 161, 250, 1);
+    --bwbw-6: rgba(140, 140, 140, 1);
+    --dark: rgba(0, 0, 0, 1);
+    --gray: rgba(86, 87, 92, 1);
+    --graybluedarkerbg: rgba(235, 243, 255, 1);
+    --graybluelightbg: rgba(245, 248, 251, 1);
+    --white: rgba(255, 255, 255, 1);
+    --light-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.05);
+    --shadow-soft: 0px 6px 33.5px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'PT Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

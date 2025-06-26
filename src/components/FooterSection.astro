@@ -1,0 +1,96 @@
+---
+const contactInfo = [
+  { email: "dis@kpfu.ru", phone: "+7 (843) 206 50 84" },
+  {
+    address: "420008, г. Казань, ул. Нужина 1/37",
+    hours: "пн — пт, с 8 до 17 часов (обед с 12 до 13)",
+  },
+];
+
+const legalLinks = [
+  { text: "Политика конфиденциальности", width: "221px" },
+];
+---
+
+<footer id="contacts" class="w-full py-8 md:py-16">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row justify-between gap-8 md:gap-12">
+      <!-- Left Column -->
+      <div class="flex flex-col gap-8 md:gap-0 md:justify-between md:h-[266px]">
+        <!-- Logos -->
+        <div class="flex flex-col md:flex-row gap-8 md:gap-20">
+          <!-- First Logo -->
+          <div class="relative w-[268px] h-[54px]">
+            <img src="logoDistricked.svg" alt="Логотип DISTRICT" loading="lazy" />
+          </div>
+
+          <!-- Second Logo -->
+          <div class="hidden md:flex relative w-[334.31px] h-[68px]">
+            <img src="logoDISKFU.svg" alt="Логотип ДИС КФУ" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <p class="text-[var(--gray)] text-sm md:text-base" style="font-family: 'PT Sans'">
+          © 2025 Казанский федеральный университет, все права защищены
+        </p>
+      </div>
+
+      <!-- Right Column -->
+      <div class="flex flex-col gap-8 md:gap-0 md:justify-between md:h-[267px]">
+        <div class="flex flex-col gap-6 md:gap-[52px]">
+          <h4 style="font-family: 'PT Sans'" class="text-xl md:text-[32px] text-black font-bold">
+            Связаться с нами
+          </h4>
+
+          <div class="flex flex-col md:flex-row gap-6 md:gap-[133px]">
+            {contactInfo.map((info) => (
+              <div class="flex flex-col gap-3">
+                {info.email && (
+                  <a 
+                    href={`mailto:${info.email}`}
+                    style="font-family: 'PT Sans'" 
+                    class="font-normal text-base md:text-[18px] leading-[30px] hover:text-[var(--bluebright)] transition-colors text-[#56575c]"
+                  >
+                    {info.email}
+                  </a>
+                )}
+                {info.phone && (
+                  <a 
+                    href={`tel:${info.phone}`}
+                    style="font-family: 'PT Sans'" 
+                    class="font-normal text-[#56575c] text-base md:text-[18px] leading-[30px] hover:text-[var(--bluebright)] transition-colors"
+                  >
+                    {info.phone}
+                  </a>
+                )}
+                {info.address && (
+                  <p style="font-family: 'PT Sans'" class="font-normal text-[#56575c] text-base md:text-[18px] leading-[30px]">
+                    {info.address}
+                  </p>
+                )}
+                {info.hours && (
+                  <p style="font-family: 'PT Sans'" class="font-normal text-[#56575c] text-base md:text-[18px] leading-[30px]">
+                    {info.hours}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-4 md:gap-4">
+          {legalLinks.map((link) => (
+            <a
+              href="https://kpfu.ru/portal/docs/F722252292/pd_policy.pdf"
+              class="text-[var(--gray)] text-sm md:text-base hover:text-[var(--bluebright)] transition-colors"
+              style="font-family: 'PT Sans'"
+            >
+              {link.text}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

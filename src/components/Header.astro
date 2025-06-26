@@ -1,0 +1,125 @@
+---
+const navItems = [
+  { label: "О нас", href: "#about" },
+  { label: "Роудмап", href: "#roadmap" },
+  { label: "Роли", href: "#roles" },
+  { label: "Фичи", href: "#features" },
+  { label: "Стажировка", href: "#career" },
+  { label: "Контакты", href: "#contacts" },
+];
+---
+
+<header id="header" class="backdrop-blur-md w-full fixed pt-[3px] pb-[2px] top-0 z-50 transition-all duration-300 ease-in-out bg-transparent">
+  <div class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center h-10">
+      <img class="h-full w-auto" alt="КФУ логотип" src="/VectorFNNN.svg" />
+      <img class="h-full ml-[10px] w-auto" alt="Департамент информатизации и связи" src="/nadp.svg" />
+    </div>
+
+    <button id="mobile-menu-btn" class="lg:hidden text-white p-2" aria-label="Открыть меню">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+
+    <div class="hidden lg:flex items-center gap-8">
+      <nav class="mr-[60px]">
+        <ul class="flex gap-[52px]">
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-white text-[18px] leading-5 cursor-pointer hover:text-blue-200 transition-colors"
+                style="font-family: 'PT Sans'"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <a href="https://newlk.kpfu.ru/user" class="hover:bg-white hover:text-black px-[38px] py-[15px] bg-[var(--bluebright)] rounded-[30px] font-bold text-white h-[42px] flex items-center transition-all">
+        Протестировать
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="z-[100000] fixed inset-0 bg-black/70 backdrop-blur-sm transition-transform duration-300 ease-in-out translate-x-full lg:hidden" style="top: 72px;">
+    <div class="flex flex-col h-full px-6 py-8">
+      <nav class="flex-1">
+        <ul class="space-y-6">
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-white text-[26px] sm:text-3xl block py-2 cursor-pointer mobile-nav-link"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <a href="https://newlk.kpfu.ru/user" class="w-full px-[38px] py-[15px] h-[50px] bg-[var(--bluebright)] rounded-[30px] font-bold text-white mt-8 flex items-center justify-center">
+        Протестировать
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu functionality
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const header = document.getElementById('header');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  let isMenuOpen = false;
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    if (isMenuOpen) {
+      mobileMenu?.classList.remove('translate-x-full');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu?.classList.add('translate-x-full');
+      document.body.style.overflow = 'unset';
+    }
+  });
+
+  // Close mobile menu when clicking nav links
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('translate-x-full');
+      document.body.style.overflow = 'unset';
+      isMenuOpen = false;
+    });
+  });
+
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    if (scrollTop > 0) {
+      header?.classList.add('bg-black/70');
+    } else {
+      header?.classList.remove('bg-black/70');
+    }
+  });
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href') || '');
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>

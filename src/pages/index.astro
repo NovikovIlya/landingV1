@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import StatisticsSection from '../components/StatisticsSection.astro';
+import RoadmapSection from '../components/RoadmapSection.astro';
+import MissionSection from '../components/MissionSection.astro';
+import GoalsSection from '../components/GoalsSection.astro';
+import RolesSection from '../components/RolesSection.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import CareerSection from '../components/CareerSection.astro';
+import FooterSection from '../components/FooterSection.astro';
+import Header from '../components/Header.astro';
+
+const seoData = {
+  title: "Единый личный кабинет КФУ | Департамент информатизации и связи",
+  description: "Цифровая платформа КФУ для студентов, преподавателей и сотрудников. Управление учебным процессом, расписанием, оценками и документами в одном месте.",
+  keywords: "КФУ, личный кабинет, Казанский федеральный университет, студенты, образование, цифровая платформа",
+  ogImage: "/imgInterfacePieces.png"
+};
+---
+
+<Layout seoData={seoData}>
+  <Header />
+  <main class="w-full">
+    <HeroSection />
+    <AboutSection />
+    <StatisticsSection />
+    <RoadmapSection />
+    <MissionSection />
+    <GoalsSection />
+    <RolesSection />
+    <FeaturesSection />
+    <CareerSection />
+    <FooterSection />
+  </main>
+</Layout>

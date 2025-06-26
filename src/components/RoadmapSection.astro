@@ -1,0 +1,236 @@
+---
+const items = [
+  {
+    id: 'project-1',
+    title: '2022 - 2023',
+    image: '/image1.png',
+    status: 'completed',
+    statusText: 'Завершено',
+    features: [
+      {
+        title: 'Декабрь 2022',
+        description: ['Отбор кандидатов на стажировку и формирование проектных команд']
+      },
+      {
+        title: 'Февраль - Март 2023',
+        description: ['Запуск проекта по разработке Единого личного кабинета']
+      },
+      {
+        title: 'Сентябрь - Октябрь 2023',
+        description: ['Разработка англоязычного кабинета для поступающих']
+      },
+      {
+        title: 'Ноябрь 2023',
+        description: ['Отбор на вторую волну стажировок DISTRICT', 'Начало проектов: Трудоустройство, Отпуск, Практики студентов, Командировки, Центр единого облуживания']
+      }
+    ]
+  },
+  {
+    id: 'project-2',
+    title: '2024',
+    image: '/image2.png',
+    status: 'completed',
+    statusText: 'Завершено',
+    features: [
+      {
+        title: 'Январь',
+        description: ['Начало работ по реструктуризации Единого личного кабинета']
+      },
+      {
+        title: 'Май',
+        description: ['Начало проекта «Табель»']
+      },
+      {
+        title: 'Ноябрь',
+        description: ['Разработка мессенджера КФУ']
+      }
+    ]
+  },
+  {
+    id: 'project-3',
+    title: '2025',
+    image: '/image3.png',
+    status: 'in-progress',
+    statusText: 'В работе',
+    features: [
+      {
+        title: 'Март - Май',
+        description: ['Разработка модуля «Преподавателю»', 'Разработка блока «Обо мне»', 'Тестовая эксплуатация ЕЛК']
+      },
+      {
+        title: 'Май - Сентябрь',
+        description: ['Настройка и тестирование жизненного цикла учётной записи и корректной работы ролевой модели кабинета', 'Сбор обратной связи от студентов, подготовка кабинета к опытной эксплуатации']
+      },
+      {
+        title: 'Июль - Октябрь',
+        description: ['Внедрение проекта «Табель»', 'Создание сервисов для аспирантов, интеграция с ролью «Студент»']
+      }
+    ]
+  },
+  {
+    id: 'project-4',
+    title: '2026',
+    image: '/image4.png',
+    status: 'upcoming',
+    statusText: 'В плане',
+    features: [
+      {
+        title: 'Январь',
+        description: ['Создание сервисов для слушателей курсов, для сотрудников']
+      }
+    ]
+  }
+];
+---
+
+<section id="roadmap" class="container sm:p-0">
+  <h2 class="text-3xl md:text-[42px] font-bold text-center leading-[140%] mb-[53px] text-black">
+    Этапы развития проекта
+  </h2>
+
+  <!-- Timeline indicator -->
+  <div class="w-full mb-8">
+    <div class="relative">
+      <div class="border-[1px] absolute top-[20%] left-0 right-0 h-0.5 !bg-[#65A1FA] -translate-y-1/2"></div>
+      <div class="relative flex justify-between items-center">
+        {items.map((item, index) => (
+          <div class="flex flex-col items-center">
+            <div class={`w-6 h-6 rounded-full z-10 transition-all duration-300 timeline-dot ${
+              index === 0 ? 'bg-[#65A1FA] scale-110' : 'bg-[#c4dcff]'
+            }`} data-index={index}></div>
+            <div class="mt-4 text-center">
+              <p style="font-family: 'PT Sans'" class={`sm:w-auto font-medium transition-all duration-300 timeline-title ${
+                index === 0 ? 'text-black' : 'text-gray-500'
+              }`}>
+                {item.title}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Content slides -->
+  <div class="relative mt-12">
+    <button id="prev-btn" class="absolute left-4 top-[17%] md:top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md transition-all hover:bg-gray-100 hover:shadow-lg focus:outline-none" aria-label="Предыдущий слайд">
+      <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <div id="roadmap-content">
+      {items.map((item, index) => (
+        <div class={`roadmap-slide ${index === 0 ? 'active' : 'hidden'}`} data-index={index}>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="rounded-xl overflow-hidden bg-black/5 flex items-center justify-center">
+              <img 
+                src={item.image} 
+                alt={`Этап развития проекта ${item.title}`}
+                class="w-full max-h-[530px] object-cover transition-transform duration-700 hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="flex flex-col justify-start">
+              <div class="flex flex-col space-y-6">
+                <span class={`inline-block px-3 py-1 text-sm font-medium rounded-full w-fit ${
+                  item.status === 'completed' ? 'bg-green-100 text-green-800' :
+                  item.status === 'in-progress' ? 'bg-purple-100 text-purple-800' :
+                  'bg-blue-100 text-blue-800'
+                }`}>
+                  {item.statusText}
+                </span>
+
+                <div>
+                  <ul class="space-y-4">
+                    {item.features.map((feature) => (
+                      <li class="flex flex-col items-start">
+                        <span class="text-lg font-semibold mb-1">{feature.title}</span>
+                        {feature.description.map((desc) => (
+                          <div class="flex items-start">
+                            <div class="h-[22px] flex items-center">
+                              <span class="inline-block w-1 h-1 m-1 bg-black rounded-full mr-2"></span>
+                            </div>
+                            <span style="font-family: 'PT Sans'">{desc}</span>
+                          </div>
+                        ))}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <button id="next-btn" class="absolute right-4 top-[17%] md:top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md transition-all hover:bg-gray-100 hover:shadow-lg focus:outline-none" aria-label="Следующий слайд">
+      <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<script>
+  let currentIndex = 0;
+  const slides = document.querySelectorAll('.roadmap-slide');
+  const dots = document.querySelectorAll('.timeline-dot');
+  const titles = document.querySelectorAll('.timeline-title');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  function updateSlide(index: number) {
+    // Hide all slides
+    slides.forEach(slide => slide.classList.add('hidden'));
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    // Show current slide
+    slides[index].classList.remove('hidden');
+    slides[index].classList.add('active');
+    
+    // Update timeline dots and titles
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add('bg-[#65A1FA]', 'scale-110');
+        dot.classList.remove('bg-[#c4dcff]');
+      } else if (i < index) {
+        dot.classList.add('bg-[#D1E3FE]');
+        dot.classList.remove('bg-[#65A1FA]', 'bg-[#c4dcff]', 'scale-110');
+      } else {
+        dot.classList.add('bg-[#c4dcff]');
+        dot.classList.remove('bg-[#65A1FA]', 'bg-[#D1E3FE]', 'scale-110');
+      }
+    });
+    
+    titles.forEach((title, i) => {
+      if (i === index) {
+        title.classList.add('text-black');
+        title.classList.remove('text-gray-500');
+      } else {
+        title.classList.add('text-gray-500');
+        title.classList.remove('text-black');
+      }
+    });
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+    updateSlide(currentIndex);
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    currentIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+    updateSlide(currentIndex);
+  });
+
+  // Click on timeline dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      updateSlide(currentIndex);
+    });
+  });
+</script>
